@@ -10,11 +10,16 @@ You will be graded on the exhaustiveness and quality of your unit tests, the dep
 
 ## Your Explanation Here
 
-#### Part 01 
+#### Part 01 [7 min]
 1. Bad code in line `8` to line `15` in file `dpk_old.js` no need to this way of using `if else`, We can use the null safety in JavaScript to reduce number of line of code and make it readable. 
 2.  Also on top of that, we can enhance the architect of the code and make it more **readable by split the code to pure functions every function represent a job**.
 3. will create a function called `getTrivialPartitionKey` to retrieve the `PartitionKey` if founded in event or create a hash from none. 
-4. Bug in line `10:` `const data = JSON.stringify(event);`, if the event not defined this line will crash the app, we will replace it with more safety line `const data = JSON.stringify(event || {});`
+4. Bug in line `10 & 19 ` `const data = JSON.stringify(event);`, if the event not defined this line will crash the app, we will replace it with more safety line `const data = JSON.stringify(event || {});`
 
-#### Part 02
+#### Part 02 [15 min]
 
+1. Repeating the same approach in Part 01, reduce number of `if else` using null safety approach in JavaScript.
+2. Removing unnecessary variables to optimize the memory a little bit.
+3. Short the logic as possible by removing unnecessary `if else`
+4. Line `20` Check if the `typeof of trivialPartitionKey !== 'string'` to enforce converting to string.
+5. Return the TRIVIAL_PARTITION_KEY if trivialPartitionKey not available.
