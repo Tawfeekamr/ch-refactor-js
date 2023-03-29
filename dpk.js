@@ -1,19 +1,19 @@
 const crypto = require("crypto");
 
-
+const TRIVIAL_PARTITION_KEY = "0";
+const MAX_PARTITION_KEY_LENGTH = 256;
   // [Part 01] in Refactoring.md
-  function getTrivialPartitionKey(event = undefined) {
+  function getTrivialPartitionKey(event) {
     if (event?.partitionKey) {
       return event.partitionKey;
     }
-    const data = JSON.stringify(event || {});
-    return crypto.createHash("sha3-512").update(data).digest("hex");
+    const data = event ? JSON.stringify(event) : "";
+    const hash = data ? crypto.createHash("sha3-512").update(data).digest("hex") : undefined
+    return hash;
   }
 
 // [Part 02] in Refactoring.md
 function deterministicPartitionKey(event) {
-    const TRIVIAL_PARTITION_KEY = "0";
-    const MAX_PARTITION_KEY_LENGTH = 256;
 
     let trivialPartitionKey = getTrivialPartitionKey(event);
 
@@ -21,7 +21,7 @@ function deterministicPartitionKey(event) {
         trivialPartitionKey = JSON.stringify(trivialPartitionKey);
     }
 
-    if (trivialPartitionKey.length > MAX_PARTITION_KEY_LENGTH) {
+    if (trivialPartitionKey?.length > MAX_PARTITION_KEY_LENGTH) {
         trivialPartitionKey = crypto.createHash("sha3-512").update(trivialPartitionKey).digest("hex");
     }
 

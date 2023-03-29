@@ -23,3 +23,8 @@ You will be graded on the exhaustiveness and quality of your unit tests, the dep
 3. Short the logic as possible by removing unnecessary `if else`
 4. Line `20` Check if the `typeof of trivialPartitionKey !== 'string'` to enforce converting to string.
 5. Return the TRIVIAL_PARTITION_KEY if trivialPartitionKey not available.
+
+#### Part 03 [15 min] Unit Test
+
+1. Add some fixes to make sure the test cases working.
+2. writing 2 test cases you can check `dpk.test.js`
